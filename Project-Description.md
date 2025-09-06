@@ -10,4 +10,4 @@
 
 **Description:**
 
-A head mounted visual assist system for the hard of sight. 
+A head mounted visual assist system for the visually impaired.
