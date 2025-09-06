@@ -15,7 +15,7 @@ A head mounted visual assist system for the visually impaired.
 RAG, OCR, TTS/ STT
 
 **Faculty Advisor:**<br>
-NBD
+TBD
 
 **Repository Link:**<br>
 https://github.com/UC-CS-SeniorDesignProject/NorthStar
