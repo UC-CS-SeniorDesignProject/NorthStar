@@ -8,3 +8,5 @@
  - Jared Walden (CS) [waldenjd@mail.uc.edu](mailto:waldenjd@mail.uc.edu)
  - Viet Ton (CS) [tonvt@mail.uc.edu](mailto:tonvt@mail.uc.edu)
 
+**Description:**
+A head mounted visual assist system for the hard of sight. 
