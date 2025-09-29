@@ -10,3 +10,11 @@
 
 **Description:**<br>
 A head mounted visual assist system for the visually impaired.
+
+**Jared – Hardware + Model / UX Design**
+    
+Select microcontroller/embedded platform (e.g., Raspberry Pi, Jetson Nano).
+Prototype glasses hardware (cameras, speakers, layout).
+Design wearable model (fit, weight distribution, accessibility).
+Develop user input system (voice commands, touchpad, or buttons).
+Conduct user testing sessions to refine ergonomics and usability.
