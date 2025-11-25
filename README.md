@@ -1,9 +1,29 @@
-# Northstar - A Vision Assistance Project
-Created by
-- Christian Graber
-- Viet Ton
-- Jared Walden
-- Mohamed Elmogaber
+### Northstar - A Vision Assistance Project
+
+## Table of Contents
+
+- [Team Members](#team-members)
+- [Project Abstract](#project-abstract)
+- [Project Description](#project-description)
+- [User Stories](#user-stories)
+- [Project Tasks](#project-tasks)
+- [Milestones List](#milestones-list)
+- [Project Timeline](#project-timeline)
+- [Effort Matrix](#effort-matrix)
+- [ABET Concerns](#abet-concerns)
+- [Slideshow](#slideshow)
+- [Self-Assessments](#self-assessments)
+- [Professional Biographies](#professional-biographies)
+- [Budget](#budget)
+- [Appendix](#appendix)
+- [Repository](#repository)
+
+# Team Members
+
+- Christian Graber – API Designer / Software Lead  
+- Jared Walden – Hardware + Model / UX Design  
+- Viet Ton – RAG Integration  
+- Mohamed Elmogaber – Computer Vision Functionality  
 
 # Project Abstract
 
@@ -21,10 +41,10 @@ NorthStar is a prototype wearable device designed to support users with visual i
 4\. As a medical professional, I want to review data collected by the system so that I can monitor and support the user’s well-being.  
 5\. As a system administrator, I want to manage device updates and user profiles so that the system remains secure and personalized.
 
-![][image1]  
-![][image2]
-
-![][image3]
+## Design Diagrams
+<img width="410" height="429" alt="Picture1" src="https://github.com/user-attachments/assets/ab04305b-a42c-486c-88fc-a780c9af7e4f" />
+<img width="411" height="424" alt="Picture2" src="https://github.com/user-attachments/assets/cac6fbeb-b8a3-4f17-a3e1-cccc6db23b14" />
+<img width="425" height="396" alt="Picture3" src="https://github.com/user-attachments/assets/e4a8a301-a452-4404-be9f-294348ea2618" />
 
 # Project Tasks
 
@@ -60,7 +80,7 @@ NorthStar is a prototype wearable device designed to support users with visual i
 - Optimize computer vision models for embedded hardware to improve processing time and battery load.  
 - Integrate multi-modal outputs (object detection \+ text reading) into a unified vision module for clean user experience.
 
-**Milestones List**
+## Milestones List
 
 | Milestone | Description |
 | :---- | :---- |
@@ -76,7 +96,7 @@ NorthStar is a prototype wearable device designed to support users with visual i
 | Testing, Optimization & UX Evaluation | Team runs structured testing to improve latency, usability, and clarity of outputs. Student participants provide usability feedback. |
 | Final Presentation & Documentation | Full integration is complete with stable performance. The team finalizes documentation, visual report, and final presentation. |
 
-**Table 1\. Project Timeline**
+## Project Timeline
 
 | Task | Start Date | End Date | Milestone Connection |
 | :---- | :---- | :---- | :---- |
@@ -97,7 +117,7 @@ NorthStar is a prototype wearable device designed to support users with visual i
 | Run User Testing Sessions | Apr 1 | Apr 15 | Testing, Optimization & UX Evaluation |
 | Finalize Documentation & Presentation | Apr 15 | Apr 20 | Final Presentation & Documentation |
 
-**Table 2\. Effort Matrix**
+## Effort Matrix
 
 | Task | Mohamed (Vision) | Viet (RAG) | Christian (API) | Jared (Hardware/UX) | Primary Responsible |
 | :---- | :---- | :---- | :---- | :---- | :---- |
@@ -130,7 +150,7 @@ The social impact also presents a crucial constraint; the physical design must b
 
 Finally, the project is constrained by technical complexity, requiring the seamless integration of hardware, computer vision models, and a Retrieval-Augmented Generation pipeline to function in real-time. The latency of this integrated system is a critical factor, as delays in providing auditory feedback could compromise user safety and the device’s overall utility. These economic, ethical, social, and technical constraints collectively define the central challenges we must navigate to create a viable and impactful solution.
 
-# Powerpoint:
+# Slideshow
 
 https://mailuc-my.sharepoint.com/:p:/r/personal/waldenjd\_mail\_uc\_edu/\_layouts/15/Doc.aspx?sourcedoc=%7B6317621D-4E31-469D-BC70-62E96A4392AD%7D\&file=Presentation%201.pptx\&action=editNew\&mobileredirect=true\&wdOrigin=SEARCHENGINE.GOOGLE%2CAPPHOME-WEB.BANNER.NEWBLANK\&wdPreviousSession=5904d00e-2bd9-4980-927a-a0d25a4fcf03\&wdPreviousSessionSrc=AppHomeWeb\&ct=1761597309878
 
