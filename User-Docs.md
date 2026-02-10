@@ -61,7 +61,7 @@ This is the default mode. The system uses **Object Detection** to identify obsta
 
 Use this mode to read signs, menus, or documents.
 
-* **How to activate:** Press button on right side to activate.
+* **How to activate:** Press the button on the right side of the Processing Unit to activate Reading Mode.
 
 **Function:** The system uses Optical Character Recognition (OCR) to detect text in the camera's view.
  
