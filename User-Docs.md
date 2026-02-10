@@ -71,7 +71,7 @@ Use this mode to read signs, menus, or documents.
 
 ### Scene Description (RAG)
 
-For a more detailed understanding of your environment, use the Scene Description mode. This uses **Retrieval Augmented Generation (RAG)** to provide context-aware details.
+For a more detailed understanding of your environment, use the Scene Description mode. This uses **Retrieval-Augmented Generation (RAG)** to provide context-aware details.
  
 **How it works:** Unlike standard detection which names objects, this mode retrieves contextual information from a database.
  
