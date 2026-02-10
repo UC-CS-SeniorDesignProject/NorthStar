@@ -82,8 +82,8 @@ For a more detailed understanding of your environment, use the Scene Description
 
 NorthStar is designed to leverage the device you already carry every day. Instead of relying on heavy, standalone processors, the system connects directly to your smartphone, which acts as the central processing unit (CPU).
 
-* **Smartphone as the Brain:** By connecting the headset to your mobile device (via USB-C or wireless connection), NorthStar utilizes your phone's powerful processor to run the AI object detection and RAG models in real-time.
-* **Resource Efficiency:** Offloading processing to the phone reduces the weight of the headset and eliminates the need for a separate battery pack or microcontroller unit.
+* **Smartphone as the Brain:** By connecting the headset to your mobile device wirelessly, NorthStar utilizes your phone's powerful processor to run the AI object detection and RAG models in real-time.
+* **Resource Efficiency:** Offloading processing to the phone reduces the weight of the headset.
 * **Seamless Connectivity:** The system automatically uses your phone's existing cellular or Wi-Fi connection to retrieve context from the database and process complex scene descriptions without additional setup.
 
 ---
