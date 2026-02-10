@@ -89,16 +89,13 @@ For a more detailed understanding of your environment, use the Scene Description
 
 * **Best for:** Understanding complex scenes or identifying personal items.
 
----
+### Phone Connection
 
-## Caregiver Features
+NorthStar is designed to leverage the device you already carry every day. Instead of relying on heavy, standalone processors, the system connects directly to your smartphone, which acts as the central processing unit (CPU).
 
-NorthStar is designed to support not just the user, but their support network as well.
-
-**Hazard Alerts:** If the user encounters a dangerous obstacle or a hazardous situation, the system can send an alert to a registered caregiver.
- 
-**Health Monitoring:** Medical professionals or caregivers can review activity data to monitor the user's well-being and navigation patterns.
-
+* **Smartphone as the Brain:** By connecting the headset to your mobile device (via USB-C or wireless connection), NorthStar utilizes your phone's powerful processor to run the AI object detection and RAG models in real-time.
+* **Resource Efficiency:** Offloading processing to the phone reduces the weight of the headset and eliminates the need for a separate battery pack or microcontroller unit.
+* **Seamless Connectivity:** The system automatically uses your phone's existing cellular or Wi-Fi connection to retrieve context from the database and process complex scene descriptions without additional setup.
 
 ---
 
@@ -106,7 +103,7 @@ NorthStar is designed to support not just the user, but their support network as
 
 We understand that a device with a camera raises privacy concerns. NorthStar is built with **Ethical and Security Constraints** in mind.
 
-* **Local Processing:** Whenever possible, images are processed locally on the device (Raspberry Pi) rather than being sent to the cloud. This ensures your visual data remains private.
+* **Local Processing:** Whenever possible, images are processed locally on the device rather than being sent to the cloud. This ensures your visual data remains private.
  
 **Data Security:** Any stored information, such as user preferences or personal object databases, is secured to prevent misuse.
 
