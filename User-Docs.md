@@ -3,21 +3,18 @@
 Welcome to **NorthStar**, a head-mounted visual assistant designed to help you navigate the world with greater independence and safety. By combining advanced computer vision with audio feedback, NorthStar turns the visual world into a detailed auditory experience.
 
 This guide covers everything from setting up your device to using its advanced navigation and reading features.
-
 ## Table of Contents
 
-1. [Getting Started](https://www.google.com/search?q=%23getting-started)
-2. [Hardware Overview](https://www.google.com/search?q=%23hardware-overview)
-3. [Wearing the Device](https://www.google.com/search?q=%23wearing-the-device)
-4. [Operation Modes](https://www.google.com/search?q=%23operation-modes)
-* [Navigation Mode](https://www.google.com/search?q=%23navigation-mode)
-* [Reading Mode (Text-to-Speech)](https://www.google.com/search?q=%23reading-mode-text-to-speech)
-* [Scene Description (RAG)](https://www.google.com/search?q=%23scene-description-rag)
-
-
-5. [Caregiver Features](https://www.google.com/search?q=%23caregiver-features)
-6. [Privacy & Security](https://www.google.com/search?q=%23privacy--security)
-7. [FAQ & Troubleshooting](https://www.google.com/search?q=%23faq--troubleshooting)
+1. [Getting Started](#getting-started)
+2. [Hardware Overview](#hardware-overview)
+3. [Wearing the Device](#wearing-the-device)
+4. [Operation Modes](#operation-modes)
+    * [Navigation Mode](#navigation-mode)
+    * [Reading Mode (Text-to-Speech)](#reading-mode-text-to-speech)
+    * [Scene Description (RAG)](#scene-description-rag)
+5. [Caregiver Features](#caregiver-features)
+6. [Privacy & Security](#privacy--security)
+7. [FAQ & Troubleshooting](#faq--troubleshooting)
 
 ---
 
@@ -42,7 +39,7 @@ NorthStar is designed to be affordable and easy to use. Before using the device 
 The system consists of three main parts working together:
 
 1. **Vision Goggles (Input):** Located on the headset, this includes the camera and sensors that capture the environment around you.
-2. **Processing Unit:** This compact computer runs the artificial intelligence models. It processes images locally to identify objects and read text.
+2. **Processing Unit:** This compact computer runs the artificial intelligence models. It processes images locally and remotely via a web server to identify objects and read text.
 3. **Audio Output (Output):** This converts the visual data into spoken words. You will hear descriptions of objects, people, and text through your headphones.
 > **Note:** The device is designed to be unobtrusive and comfortable for long-term wear.
 
@@ -50,9 +47,8 @@ The system consists of three main parts working together:
 
 ## Wearing the Device
 
-1. **Fit the Headset:** Place the goggles over your eyes or forehead (depending on your specific prototype configuration). Adjust the strap for a snug but comfortable fit.
-2. **Connect Audio:** Plug in your headphones or pair your Bluetooth audio device to the Processing Unit.
-3. **Power On:** Press the power button on the Processing Unit. You should hear a startup chime or voice prompt indicating the system is booting up.
+1. **Fit the Headset:** Place the goggles over your eyes. Adjust the strap for a snug but comfortable fit.
+2. **Power On:** Press the power button on the Processing Unit. You should hear a startup chime or voice prompt indicating the system is booting up.
 
 ---
 
@@ -74,7 +70,7 @@ This is the default mode. The system uses **Object Detection** to identify obsta
 
 Use this mode to read signs, menus, or documents.
 
-* **How to activate:** (Refer to your specific device controls, typically a voice command or button press).
+* **How to activate:** Press button on right side to activate.
 
 **Function:** The system uses Optical Character Recognition (OCR) to detect text in the camera's view.
  
