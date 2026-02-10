@@ -27,17 +27,11 @@ NorthStar is designed to be affordable and easy to use. Before using the device 
 
 ### What's in the Box?
 
-* 
-**NorthStar Headset:** The main frame containing the camera and sensors.
+* **NorthStar Headset:** The main frame containing the camera and sensors.
 
+* **Processing Unit:** A portable unit that powers the AI.
 
-* 
-**Processing Unit:** A portable unit (Raspberry Pi) that powers the AI.
-
-
-* 
-**Audio Output Module:** Headphones or bone-conduction speakers for audio feedback.
-
+* **Audio Output Module:** Headphones or bone-conduction speakers for audio feedback.
 
 * **Power Bank & Cable:** For charging the device.
 
