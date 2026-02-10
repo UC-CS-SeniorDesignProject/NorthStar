@@ -126,9 +126,3 @@ A: No. We carefully calibrate the audio feedback to be helpful without being ove
 * **Issue: Text reading is inaccurate.**
   * **Cause:** The text might be too far away or stylized.
   * **Fix:** Try to hold the text steady and closer to the camera.
-
-
-
-
-
-For further assistance, please contact the development team or your system administrator.
