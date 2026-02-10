@@ -116,22 +116,16 @@ A: No. We carefully calibrate the audio feedback to be helpful without being ove
 ### Troubleshooting
 
 * **Issue: Audio is delayed.**
-**Cause:** Latency in the system processing.
-
-
-* **Fix:** Ensure the Processing Unit is not overheating and has sufficient battery. Restart the device to clear temporary memory.
-
+  * **Cause:** Latency in the system processing.
+  * **Fix:** Ensure the Processing Unit is not overheating and has sufficient battery. Restart the device to clear temporary memory.
 
 * **Issue: System is not recognizing objects.**
-**Cause:** Poor lighting or obstructed camera.
-
-
-* **Fix:** Ensure the camera lens is clean and that you are in a well-lit environment.
-
+  * **Cause:** Poor lighting or obstructed camera.
+  * **Fix:** Ensure the camera lens is clean and that you are in a well-lit environment.
 
 * **Issue: Text reading is inaccurate.**
-* **Cause:** The text might be too far away or stylized.
-**Fix:** Try to hold the text steady and closer to the camera.
+  * **Cause:** The text might be too far away or stylized.
+  * **Fix:** Try to hold the text steady and closer to the camera.
 
 
 
