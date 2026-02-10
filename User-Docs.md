@@ -6,15 +6,13 @@ This guide covers everything from setting up your device to using its advanced n
 ## Table of Contents
 
 1. [Getting Started](#getting-started)
-2. [Hardware Overview](#hardware-overview)
-3. [Wearing the Device](#wearing-the-device)
-4. [Operation Modes](#operation-modes)
+2. [Wearing the Device](#wearing-the-device)
+3. [Operation Modes](#operation-modes)
     * [Navigation Mode](#navigation-mode)
     * [Reading Mode (Text-to-Speech)](#reading-mode-text-to-speech)
     * [Scene Description (RAG)](#scene-description-rag)
-5. [Caregiver Features](#caregiver-features)
-6. [Privacy & Security](#privacy--security)
-7. [FAQ & Troubleshooting](#faq--troubleshooting)
+4. [Privacy & Security](#privacy--security)
+5. [FAQ & Troubleshooting](#faq--troubleshooting)
 
 ---
 
