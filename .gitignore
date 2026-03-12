@@ -1,0 +1,14 @@
+# Python virtual environments
+.venv/
+venv/
+
+# Python bytecode / caches
+__pycache__/
+*.py[cod]
+
+# Local IDE metadata
+.idea/
+
+# Local OCR testing IDE/cache folders
+ocr-testing/.idea/
+ocr-testing/__pycache__/

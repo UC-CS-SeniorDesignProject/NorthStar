@@ -17,6 +17,74 @@
 - [Budget](#budget)
 - [Appendix](#appendix)
 - [Repository](#repository)
+- [Controller and Flutter Run Flow](#controller-and-flutter-run-flow)
+
+## Controller and Flutter Run Flow
+
+This section explains what happens when you run the Python controller, then run Flutter, and press Start Vision.
+
+### 1) Start the Python controller
+
+- Command from repo root:
+
+```powershell
+C:/Users/JarHead/Documents/GitHub/NorthStar/.venv/Scripts/python.exe ocr-testing/northstar-controller.py
+```
+
+- What this does:
+	- Starts a FastAPI server on port 8000.
+	- Loads controller routes: /health, /controller/status, /controller/start, /controller/stop.
+	- Does not start the camera loop yet.
+
+### 2) Run Flutter
+
+- In a second terminal, run the Flutter app from northstar-flutter.
+- On app startup, Flutter begins polling /controller/status once per second.
+- The Vision panel initially shows idle/default values until Start Vision is pressed.
+
+### 3) Press Start Vision
+
+- Flutter sends:
+	- Method: POST
+	- URL: /controller/start
+	- JSON body: {"camera_index": 0, "display": false}
+
+- Controller behavior:
+	- If runtime is already active, returns HTTP 409.
+	- Otherwise creates NorthStarFocus and starts its processing thread.
+
+- Vision runtime startup:
+	- Loads YOLO, BLIP, and EasyOCR models.
+	- Tries camera open (Windows CAP_DSHOW first, then fallback).
+	- Starts frame processing loop, object detection, OCR requests, and periodic scene captioning.
+
+### 4) What status values mean
+
+Flutter reads these from /controller/status:
+
+- running: whether the vision loop is currently active.
+- thread_alive: whether the worker thread is still alive.
+- last_frame_time: if this stays 0.0, frames are not being received.
+- last_error: backend camera/runtime error if one occurred.
+- scene_description: scene caption text (starts as Analyzing scene...).
+- latest_text: OCR output from the currently locked object.
+- locked_label: current focused object label.
+
+### 5) Why it can look stuck
+
+- If scene_description remains Analyzing scene... and latest_text is empty, check:
+	- last_frame_time
+	- last_error
+
+- Common meaning:
+	- last_error = Failed to read frame from camera. means camera opened but frame reads failed.
+	- running = false with thread_alive = false means the vision loop exited.
+
+### 6) Web client notes
+
+- For Flutter web, use http://127.0.0.1:8000 as controller base URL.
+- CORS is enabled in the controller for localhost/127.0.0.1 origins.
+- If you see Failed to fetch, verify URL and that the controller process is still running.
 
 # Team Members
 

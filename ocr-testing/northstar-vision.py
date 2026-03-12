@@ -59,7 +59,9 @@ class SceneBrain:
             desc = self.processor.decode(out[0], skip_special_tokens=True)
             with self.lock:
                 self.current_description = desc.capitalize()
-        except: pass
+        except Exception:
+            with self.lock:
+                self.current_description = "Scene analysis unavailable"
 
 class OCRWorker(threading.Thread):
     def __init__(self):
@@ -68,8 +70,9 @@ class OCRWorker(threading.Thread):
         self.input_queue = queue.Queue(maxsize=1)
         self.latest_text = ""
         self.lock = threading.Lock()
-        print(" [Init] Loading EasyOCR...")
-        self.reader = easyocr.Reader(['en'], gpu=True) 
+        use_gpu = torch.cuda.is_available()
+        print(f" [Init] Loading EasyOCR... (gpu={use_gpu})")
+        self.reader = easyocr.Reader(['en'], gpu=use_gpu)
 
     def request_ocr(self, roi):
         if not self.input_queue.full():
@@ -94,8 +97,10 @@ class OCRWorker(threading.Thread):
                 self.input_queue.task_done()
 
 class NorthStarFocus:
-    def __init__(self):
+    def __init__(self, camera_index=0, display=True):
         print(" [Init] Loading YOLOv8...")
+        self.camera_index = camera_index
+        self.display = display
         self.yolo = YOLO('yolov8s.pt') 
         
         self.scene_brain = SceneBrain()
@@ -103,13 +108,52 @@ class NorthStarFocus:
         self.ocr_worker.start()
         self.smoother = SmoothingFilter()
         
-        self.running = True
+        self.running = False
+        self.state_lock = threading.Lock()
+        self.last_error = None
+        self.last_frame_time = 0.0
+        self.last_scene_analysis_time = 0.0
+        self.scene_analysis_lock = threading.Lock()
+        self.scene_analysis_in_progress = False
         
         # State
         self.locked_label = None 
         self.locked_box = None
         self.last_seen_time = 0
         self.last_ocr_time = 0
+
+    def stop(self):
+        self.running = False
+
+    def get_state(self):
+        with self.ocr_worker.lock:
+            latest_text = self.ocr_worker.latest_text
+        with self.scene_brain.lock:
+            description = self.scene_brain.current_description
+        with self.scene_analysis_lock:
+            scene_analysis_in_progress = self.scene_analysis_in_progress
+
+        with self.state_lock:
+            return {
+                "running": self.running,
+                "locked_label": self.locked_label,
+                "locked_box": list(self.locked_box) if self.locked_box else None,
+                "last_seen_time": self.last_seen_time,
+                "last_error": self.last_error,
+                "last_frame_time": self.last_frame_time,
+                "latest_text": latest_text,
+                "scene_description": description,
+                "scene_analysis_in_progress": scene_analysis_in_progress,
+                "camera_index": self.camera_index,
+                "display": self.display,
+            }
+
+    def _analyze_scene_worker(self, frame):
+        try:
+            self.scene_brain.analyze(frame)
+        finally:
+            with self.scene_analysis_lock:
+                self.scene_analysis_in_progress = False
 
     def calculate_focus_score(self, box, frame_w, frame_h):
         """ Returns a score based on Size + Center Proximity """
@@ -138,17 +182,47 @@ class NorthStarFocus:
         return final_score
 
     def start(self):
-        cap = cv2.VideoCapture(2)
+        self.running = True
+        self.last_error = None
+        self.last_frame_time = 0.0
+        self.last_scene_analysis_time = 0.0
+
+        # On Windows, CAP_DSHOW often gives more reliable USB camera behavior.
+        if hasattr(cv2, "CAP_DSHOW"):
+            cap = cv2.VideoCapture(self.camera_index, cv2.CAP_DSHOW)
+            if not cap.isOpened():
+                cap.release()
+                cap = cv2.VideoCapture(self.camera_index)
+        else:
+            cap = cv2.VideoCapture(self.camera_index)
         cap.set(cv2.CAP_PROP_FPS, 30)
         cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
         cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+
+        if not cap.isOpened():
+            with self.state_lock:
+                self.last_error = f"Unable to open camera index {self.camera_index}"
+                self.running = False
+            return
         
         print("--- NORTHSTAR FOCUS MODE ---")
         print("Center your target to lock on.")
 
+        consecutive_read_failures = 0
+
         while self.running:
             ret, frame = cap.read()
-            if not ret: break
+            if not ret:
+                consecutive_read_failures += 1
+                if consecutive_read_failures <= 30:
+                    time.sleep(0.05)
+                    continue
+                with self.state_lock:
+                    self.last_error = "Failed to read frame from camera."
+                break
+            consecutive_read_failures = 0
+            with self.state_lock:
+                self.last_frame_time = time.time()
             
             h, w, _ = frame.shape
             display_frame = frame.copy()
@@ -176,49 +250,65 @@ class NorthStarFocus:
 
             # --- LOCK LOGIC ---
             best_candidate = None
+
+            with self.state_lock:
+                current_locked_label = self.locked_label
+                last_seen_time = self.last_seen_time
             
             # A. If we are already LOCKED, try to maintain it
-            if self.locked_label:
+            if current_locked_label:
                 # Look for our locked label specifically
-                matches = [c for c in candidates if c[0] == self.locked_label]
+                matches = [c for c in candidates if c[0] == current_locked_label]
                 
                 if matches:
                     # Found it again! Update lock
                     best_candidate = max(matches, key=lambda x: x[2]) # Best match
-                    self.last_seen_time = time.time()
+                    with self.state_lock:
+                        self.last_seen_time = time.time()
                 else:
                     # We lost visual... check timeout
-                    if time.time() - self.last_seen_time > LOCK_TIMEOUT:
+                    if time.time() - last_seen_time > LOCK_TIMEOUT:
                         print(" [System] Lock Lost.")
-                        self.locked_label = None # Release lock
-                        self.locked_box = None
+                        with self.state_lock:
+                            self.locked_label = None # Release lock
+                            self.locked_box = None
             
             # B. If NOT locked, look for the best new target
-            if not self.locked_label and candidates:
+            with self.state_lock:
+                has_lock = self.locked_label is not None
+
+            if not has_lock and candidates:
                 # Sort by Focus Score (High = Center/Large)
                 best_candidate = max(candidates, key=lambda x: x[2])
                 
                 # Only lock if it's "worthy" (Score > threshold)
                 if best_candidate[2] > 0.8: # Threshold prevents locking onto tiny background noise
-                    self.locked_label = best_candidate[0]
-                    self.last_seen_time = time.time()
-                    print(f" [System] Locked on: {self.locked_label}")
+                    with self.state_lock:
+                        self.locked_label = best_candidate[0]
+                        self.last_seen_time = time.time()
+                        current_locked_label = self.locked_label
+                    print(f" [System] Locked on: {current_locked_label}")
+
+            with self.state_lock:
+                current_locked_label = self.locked_label
 
             # --- DRAWING ---
             
             # Draw Non-Locked Objects (Blue, Dim)
             for label, box, score in candidates:
-                if label != self.locked_label:
+                if label != current_locked_label:
                     x1, y1, x2, y2 = box
                     cv2.rectangle(display_frame, (x1, y1), (x2, y2), (100, 50, 0), 1)
 
             # Draw LOCKED Object (Green, Bright, Smoothed)
-            if best_candidate and self.locked_label:
+            if best_candidate and current_locked_label:
                 label, raw_box, score = best_candidate
                 
                 # Smooth the jitter
-                self.locked_box = self.smoother.smooth(label, raw_box)
-                x1, y1, x2, y2 = self.locked_box
+                smoothed_box = self.smoother.smooth(label, raw_box)
+                with self.state_lock:
+                    self.locked_box = smoothed_box
+                x1, y1, x2, y2 = smoothed_box
                 
                 # Visual Tether (Line from Center to Object)
                 obj_cx, obj_cy = (x1+x2)//2, (y1+y2)//2
@@ -245,14 +335,27 @@ class NorthStarFocus:
             with self.ocr_worker.lock:
                 text = self.ocr_worker.latest_text
             
-            if self.locked_label and len(text) > 2:
+            if current_locked_label and len(text) > 2:
                 cv2.rectangle(display_frame, (0, 640), (1280, 720), (0,0,0), -1)
                 cv2.putText(display_frame, f"READING: {text}", (30, 690), 
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
 
             # Scene Description
-            if time.time() % 5 < 0.1:
-                 threading.Thread(target=self.scene_brain.analyze, args=(frame.copy(),)).start()
+            now = time.time()
+            if now - self.last_scene_analysis_time >= 5.0:
+                should_analyze = False
+                with self.scene_analysis_lock:
+                    if not self.scene_analysis_in_progress:
+                        self.scene_analysis_in_progress = True
+                        should_analyze = True
+
+                if should_analyze:
+                    self.last_scene_analysis_time = now
+                    threading.Thread(
+                        target=self._analyze_scene_worker,
+                        args=(frame.copy(),),
+                        daemon=True,
+                    ).start()
             
             with self.scene_brain.lock:
                 desc = self.scene_brain.current_description
@@ -260,12 +363,17 @@ class NorthStarFocus:
             cv2.rectangle(display_frame, (0, 0), (1280, 40), (0,0,0), -1)
             cv2.putText(display_frame, f"SCENE: {desc}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (200, 200, 255), 1)
 
-            cv2.imshow("NorthStar Focus", display_frame)
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
+            if self.display:
+                cv2.imshow("NorthStar Focus", display_frame)
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    self.running = False
+                    break
         
+        with self.state_lock:
+            self.running = False
         cap.release()
-        cv2.destroyAllWindows()
+        if self.display:
+            cv2.destroyAllWindows()
 
 if __name__ == "__main__":
     app = NorthStarFocus()
