@@ -21,70 +21,136 @@
 
 ## Controller and Flutter Run Flow
 
-This section explains what happens when you run the Python controller, then run Flutter, and press Start Vision.
+This section explains how to set up and run the vision system with both Python server and Flutter components.
 
-### 1) Start the Python controller
+### 1) Setup Python Environment
 
-- Command from repo root:
+First, ensure you have the virtual environment with required dependencies:
 
 ```powershell
-C:/Users/JarHead/Documents/GitHub/NorthStar/.venv/Scripts/python.exe ocr-testing/northstar-controller.py
+# From repo root directory
+# Activate virtual environment
+.venv\Scripts\activate
+
+# Install dependencies (if not already done)
+pip install fastapi uvicorn opencv-python easyocr torch ultralytics transformers pillow numpy
 ```
 
-- What this does:
-	- Starts a FastAPI server on port 8000.
-	- Loads controller routes: /health, /controller/status, /controller/start, /controller/stop.
-	- Does not start the camera loop yet.
+### 2) Start the Python Controller
 
-### 2) Run Flutter
+Run the vision server using the virtual environment:
 
-- In a second terminal, run the Flutter app from northstar-flutter.
-- On app startup, Flutter begins polling /controller/status once per second.
-- The Vision panel initially shows idle/default values until Start Vision is pressed.
+```powershell
+# From repo root directory  
+.venv\Scripts\python.exe ocr-testing\northstar-controller.py
+```
 
-### 3) Press Start Vision
+**What this does:**
+- Starts a FastAPI server on **port 8001** (not 8000)
+- Loads controller routes: `/health`, `/controller/status`, `/controller/start`, `/controller/stop`
+- Loads AI models: YOLO (object detection), EasyOCR (text recognition), BLIP (scene captioning)
+- Does not start camera processing until `/controller/start` is called
 
-- Flutter sends:
-	- Method: POST
-	- URL: /controller/start
-	- JSON body: {"camera_index": 0, "display": false}
+**Server Status:**
+- ✅ Success: `INFO: Uvicorn running on http://0.0.0.0:8001`
+- ❌ Port conflict: `[Errno 10048] error while attempting to bind on address`
+  - Solution: Kill existing process with `taskkill /F /PID <process_id>`
+  - Find PID with: `netstat -ano | findstr :8001`
 
-- Controller behavior:
-	- If runtime is already active, returns HTTP 409.
-	- Otherwise creates NorthStarFocus and starts its processing thread.
+### 3) Run Flutter Application
 
-- Vision runtime startup:
-	- Loads YOLO, BLIP, and EasyOCR models.
-	- Tries camera open (Windows CAP_DSHOW first, then fallback).
-	- Starts frame processing loop, object detection, OCR requests, and periodic scene captioning.
+In a **separate terminal**, start the Flutter app:
 
-### 4) What status values mean
+```powershell
+# Navigate to Flutter directory
+cd northstar-flutter
 
-Flutter reads these from /controller/status:
+# Run on web browser (recommended for development)  
+flutter run -d chrome
 
-- running: whether the vision loop is currently active.
-- thread_alive: whether the worker thread is still alive.
-- last_frame_time: if this stays 0.0, frames are not being received.
-- last_error: backend camera/runtime error if one occurred.
-- scene_description: scene caption text (starts as Analyzing scene...).
-- latest_text: OCR output from the currently locked object.
-- locked_label: current focused object label.
+# Alternative: Run with CORS disabled if needed
+flutter run -d chrome --web-browser-flag="--disable-web-security"
+```
 
-### 5) Why it can look stuck
+**Important Configuration:**
+- **Vision Controller URL**: Set to `http://127.0.0.1:8001` (note port 8001)
+- **Processing Mode**: Toggle between "Server" and "Local" modes
+- **Auto-polling**: App automatically checks server status every second
 
-- If scene_description remains Analyzing scene... and latest_text is empty, check:
-	- last_frame_time
-	- last_error
+### 4) Using the Vision System
 
-- Common meaning:
-	- last_error = Failed to read frame from camera. means camera opened but frame reads failed.
-	- running = false with thread_alive = false means the vision loop exited.
+**Toggle Button Controls:**
+- **Start/Stop Vision**: Single button that toggles between starting and stopping vision processing
+- **Server/Local Mode**: Toggle between server-based and local device processing
 
-### 6) Web client notes
+**Vision Processing Modes:**
 
-- For Flutter web, use http://127.0.0.1:8000 as controller base URL.
-- CORS is enabled in the controller for localhost/127.0.0.1 origins.
-- If you see Failed to fetch, verify URL and that the controller process is still running.
+1. **Server Mode** (Python Backend):
+   - Uses full-size AI models (YOLO, EasyOCR, BLIP)
+   - Higher accuracy (~95%)
+   - Network dependent
+   - Requires Python server running
+
+2. **Local Mode** (Device Processing):  
+   - Uses Google ML Kit (on-device processing)
+   - Good accuracy (~85-90%)
+   - Works offline
+   - Faster response time
+   - No server dependency
+
+**Automatic Fallback:**
+When "Server" mode is selected but connection fails, the app automatically falls back to local processing with a clear warning message: *"⚠️ Can't connect to server, switching to local processing"*
+
+### 5) Vision Status Indicators
+
+The app displays real-time status information:
+
+- **Vision State**: Active/Idle with processing mode indicator
+- **Camera Frames**: Receiving/None yet  
+- **Processing Mode**: Shows "Server", "Local", or "Local (Fallback)"
+- **Warning Icons**: Displayed when fallback occurs
+- **OCR Text**: Latest recognized text from camera
+- **Scene Description**: AI-generated scene caption
+- **Locked Target**: Currently focused object
+
+**Status Values from `/controller/status`:**
+- `running`: Whether vision processing is active
+- `thread_alive`: Backend processing thread status  
+- `last_frame_time`: Camera frame timestamp (0.0 = no frames)
+- `last_error`: Backend error messages
+- `scene_description`: Current scene caption
+- `latest_text`: OCR text from focused object
+- `locked_label`: Current object focus
+
+### 6) Troubleshooting
+
+**Common Issues:**
+
+🔧 **"Can't connect to server"**
+- Verify Python server is running on port 8001
+- Check `http://localhost:8001/health` in browser
+- Ensure virtual environment is activated
+
+🔧 **"Camera not working"**  
+- Check `last_frame_time` in status (should be > 0)
+- Verify camera permissions in browser
+- Look for `last_error` messages
+
+🔧 **"Vision stuck on 'Analyzing scene...'"**
+- Check `last_frame_time` and `last_error` in status
+- Common cause: Camera opened but frame reads failing
+
+🔧 **Port already in use**
+```powershell
+# Find and kill process using port 8001
+netstat -ano | findstr :8001
+taskkill /F /PID <process_id>
+```
+
+**Performance Notes:**
+- **Web (Chrome)**: Use `http://127.0.0.1:8001` as controller base URL
+- **Mobile**: Use `http://10.0.2.2:8001` for Android emulator  
+- **CORS**: Enabled for localhost/127.0.0.1 origins in Python server
 
 # Team Members
 
