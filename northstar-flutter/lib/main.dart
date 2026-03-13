@@ -7,27 +7,11 @@ import 'package:http/http.dart' as http;
 
 import 'data/local/app_database.dart';
 import 'data/local/connection/connection_health.dart';
+import 'models/relay_exchange.dart';
+import 'services/enhanced_local_service.dart';
 
 void main() {
   runApp(const MyApp());
-}
-
-enum RelayMode { server, localFallback }
-
-class RelayExchange {
-  const RelayExchange({
-    required this.request,
-    required this.response,
-    required this.mode,
-    required this.timestamp,
-    this.note,
-  });
-
-  final String request;
-  final String response;
-  final RelayMode mode;
-  final DateTime timestamp;
-  final String? note;
 }
 
 class ServerRequestException implements Exception {
@@ -58,23 +42,35 @@ class LocalLoopbackService {
 
 class ResilientRequestClient {
   ResilientRequestClient({
-    Duration timeout = const Duration(seconds: 3),
-    LocalLoopbackService? localLoopback,
+    Duration timeout = const Duration(seconds: 10),
+    EnhancedLocalLoopbackService? localLoopback,
     http.Client? httpClient,
+    this.localOnlyMode = false,
   }) : _timeout = timeout,
-       _localLoopback = localLoopback ?? LocalLoopbackService(),
+       _localLoopback = localLoopback ?? EnhancedLocalLoopbackService(),
        _httpClient = httpClient ?? http.Client();
 
   final Duration _timeout;
-  final LocalLoopbackService _localLoopback;
+  final EnhancedLocalLoopbackService _localLoopback;
   final http.Client _httpClient;
+  final bool localOnlyMode;
 
   Future<RelayExchange> send({
     required Uri endpoint,
     required String request,
+    Map<String, dynamic>? payload,
   }) async {
+    // If local-only mode is enabled, force local processing
+    if (localOnlyMode) {
+      return _localLoopback.talk(
+        request: endpoint.toString(),
+        reason: 'Local-only mode enabled',
+        payload: payload,
+      );
+    }
+
     try {
-      final String response = await _sendToServer(endpoint, request);
+      final String response = await _sendToServer(endpoint, request, payload);
       return RelayExchange(
         request: request,
         response: response,
@@ -83,23 +79,30 @@ class ResilientRequestClient {
       );
     } on TimeoutException {
       return _localLoopback.talk(
-        request: request,
+        request: endpoint.toString(),
         reason: 'Timeout while reaching server.',
+        payload: payload,
       );
     } on http.ClientException catch (error) {
       return _localLoopback.talk(
-        request: request,
+        request: endpoint.toString(),
         reason: 'Network issue: ${error.message}',
+        payload: payload,
       );
     }
   }
 
-  Future<String> _sendToServer(Uri endpoint, String requestBody) async {
+  Future<String> _sendToServer(Uri endpoint, String requestBody, Map<String, dynamic>? payload) async {
+    final Map<String, dynamic> requestData = {'message': requestBody};
+    if (payload != null) {
+      requestData.addAll(payload);
+    }
+
     final http.Response response = await _httpClient
         .post(
           endpoint,
           headers: <String, String>{'Content-Type': 'application/json'},
-          body: jsonEncode(<String, dynamic>{'message': requestBody}),
+          body: jsonEncode(requestData),
         )
         .timeout(_timeout);
 
@@ -140,6 +143,7 @@ class ResilientRequestClient {
 
   void close() {
     _httpClient.close();
+    _localLoopback.dispose();
   }
 }
 
@@ -154,9 +158,21 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late final ResilientRequestClient _client =
-      widget.client ?? ResilientRequestClient();
+  late ResilientRequestClient _client;
   late final AppDatabase _database = widget.database ?? AppDatabase();
+
+  @override
+  void initState() {
+    super.initState();
+    _client = widget.client ?? ResilientRequestClient(localOnlyMode: false);
+  }
+
+  void _updateLocalOnlyMode(bool localOnly) {
+    setState(() {
+      _client.close(); // Close old client
+      _client = ResilientRequestClient(localOnlyMode: localOnly);
+    });
+  }
 
   @override
   void dispose() {
@@ -176,7 +192,11 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
       ),
-      home: RelayHomePage(client: _client, database: _database),
+      home: RelayHomePage(
+        client: _client, 
+        database: _database,
+        onLocalOnlyModeChanged: _updateLocalOnlyMode,
+      ),
     );
   }
 }
@@ -186,10 +206,12 @@ class RelayHomePage extends StatefulWidget {
     super.key,
     required this.client,
     required this.database,
+    this.onLocalOnlyModeChanged,
   });
 
   final ResilientRequestClient client;
   final AppDatabase database;
+  final void Function(bool)? onLocalOnlyModeChanged;
 
   @override
   State<RelayHomePage> createState() => _RelayHomePageState();
@@ -210,6 +232,9 @@ class _RelayHomePageState extends State<RelayHomePage> {
   bool _isSending = false;
   bool _visionStatusFetchInFlight = false;
   bool _visionRunning = false;
+  bool _localOnlyMode = false;
+  bool _isUsingLocalMode = true; // Track current processing mode
+  String _processingMode = 'Server'; // Will be updated based on actual connection
   int _pendingOutboxCount = 0;
   String _status = 'Ready';
   String _visionText = '(no OCR text yet)';
@@ -223,6 +248,7 @@ class _RelayHomePageState extends State<RelayHomePage> {
   @override
   void initState() {
     super.initState();
+    _processingMode = widget.client.localOnlyMode ? 'Local' : 'Server';
     _dbHealthSubscription = localDbHealthStream.listen(_onDbHealthStatus);
     _onDbHealthStatus(latestLocalDbHealthStatus);
     unawaited(_loadLocalHistory());
@@ -463,10 +489,16 @@ class _RelayHomePageState extends State<RelayHomePage> {
           ? 'Connected to server'
           : 'Connection bad, using local loopback';
 
+      // Show prominent message when falling back to local despite server mode
+      if (exchange.mode == RelayMode.localFallback && !widget.client.localOnlyMode) {
+        _showError('⚠️ Can\'t connect to server, switching to local processing. Reason: ${exchange.note ?? "Unknown"}');
+      }
+
       setState(() {
         _history.insert(0, exchange);
         _pendingOutboxCount = pendingCount;
         _status = _statusWithPending(status, pendingCount);
+        _processingMode = exchange.mode == RelayMode.server ? 'Server' : 'Local (Fallback)';
         _requestController.clear();
       });
     } on ServerRequestException catch (error) {
@@ -631,17 +663,17 @@ class _RelayHomePageState extends State<RelayHomePage> {
             const SizedBox(height: 8),
             Row(
               children: <Widget>[
-                FilledButton.icon(
-                  onPressed: _visionStatusFetchInFlight ? null : _startVision,
-                  icon: const Icon(Icons.play_arrow),
-                  label: const Text('Start Vision'),
-                ),
-                const SizedBox(width: 8),
-                OutlinedButton.icon(
-                  onPressed: _visionStatusFetchInFlight ? null : _stopVision,
-                  icon: const Icon(Icons.stop),
-                  label: const Text('Stop Vision'),
-                ),
+                _visionRunning
+                  ? FilledButton.icon(
+                      onPressed: _visionStatusFetchInFlight ? null : _stopVision,
+                      icon: const Icon(Icons.stop),
+                      label: const Text('Stop Vision'),
+                    )
+                  : OutlinedButton.icon(
+                      onPressed: _visionStatusFetchInFlight ? null : _startVision,
+                      icon: const Icon(Icons.play_arrow),
+                      label: const Text('Start Vision'),
+                    ),
                 const SizedBox(width: 4),
                 IconButton(
                   onPressed: _visionStatusFetchInFlight
@@ -651,6 +683,21 @@ class _RelayHomePageState extends State<RelayHomePage> {
                         },
                   icon: const Icon(Icons.refresh),
                   tooltip: 'Refresh vision status',
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            // Local-only mode toggle
+            Row(
+              children: <Widget>[
+                OutlinedButton.icon(
+                  onPressed: () {
+                    widget.onLocalOnlyModeChanged?.call(!widget.client.localOnlyMode);
+                  },
+                  icon: Icon(widget.client.localOnlyMode 
+                    ? Icons.computer 
+                    : Icons.cloud),
+                  label: Text(widget.client.localOnlyMode ? 'Local' : 'Server'),
                 ),
               ],
             ),
@@ -674,7 +721,20 @@ class _RelayHomePageState extends State<RelayHomePage> {
                           size: 18,
                         ),
                         const SizedBox(width: 8),
-                        Text(_visionRunning ? 'Vision running' : 'Vision idle'),
+                        Expanded(
+                          child: Text(
+                            _visionRunning
+                                ? 'Vision: Active ($_processingMode)'
+                                : 'Vision: Idle',
+                            style: const TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                        if (!widget.client.localOnlyMode && _processingMode.contains('Fallback'))
+                          Icon(
+                            Icons.warning_amber,
+                            size: 18,
+                            color: Theme.of(context).colorScheme.error,
+                          ),
                       ],
                     ),
                     const SizedBox(height: 6),
