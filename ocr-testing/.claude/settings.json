@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Read(//c/Users/cgrab/OneDrive/Documents/GitHub/NorthStar/**)",
-      "Bash(python -m venv \"c:/Users/cgrab/OneDrive/Documents/GitHub/NorthStar/ocr-testing/venv\")"
-    ]
-  }
-}

@@ -12,3 +12,9 @@ __pycache__/
 # Local OCR testing IDE/cache folders
 ocr-testing/.idea/
 ocr-testing/__pycache__/
+
+# Large model weight files (download on demand)
+*.pt
+
+# Claude Code local settings
+.claude/
