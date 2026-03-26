@@ -418,21 +418,43 @@ class NorthStarApp(tk.Tk):
     def _build_report_frame(self, parent):
         frame = tk.Frame(parent, bg="#1e1e2e")
 
-        # Left panel – file picker + image preview
+        # Left panel – file picker + file list + image preview
         left = tk.Frame(frame, bg="#1e1e2e", width=420)
         left.pack(side="left", fill="y", padx=(12, 4), pady=12)
         left.pack_propagate(False)
 
         btn_frame = tk.Frame(left, bg="#1e1e2e")
         btn_frame.pack(fill="x", pady=(0, 8))
-        ttk.Button(btn_frame, text="Open Image / PDF",
+        ttk.Button(btn_frame, text="Browse File...",
                    command=self._open_file, style="Accent.TButton").pack(
             side="left", fill="x", expand=True)
+
+        # Docs folder file listing
+        tk.Label(left, text="docs/", font=("Segoe UI", 10, "bold"),
+                 bg="#1e1e2e", fg="#a6adc8", anchor="w").pack(fill="x",
+                 pady=(4, 2))
+
+        list_frame = tk.Frame(left, bg="#11111b")
+        list_frame.pack(fill="x")
+
+        self._docs_listbox = tk.Listbox(
+            list_frame, bg="#11111b", fg="#cdd6f4",
+            selectbackground="#45475a", selectforeground="#f5c2e7",
+            font=("Consolas", 10), relief="flat", height=6,
+            activestyle="none", highlightthickness=0, bd=0,
+        )
+        docs_scroll = ttk.Scrollbar(list_frame, orient="vertical",
+                                    command=self._docs_listbox.yview)
+        self._docs_listbox.config(yscrollcommand=docs_scroll.set)
+        self._docs_listbox.pack(side="left", fill="both", expand=True)
+        docs_scroll.pack(side="right", fill="y")
+        self._docs_listbox.bind("<<ListboxSelect>>", self._on_docs_select)
+        self._refresh_docs_list()
 
         self._file_label = tk.Label(left, text="No file selected",
                                     bg="#1e1e2e", fg="#6c7086",
                                     font=("Segoe UI", 9), anchor="w")
-        self._file_label.pack(fill="x")
+        self._file_label.pack(fill="x", pady=(6, 0))
 
         # Image preview canvas
         self._preview_canvas = tk.Canvas(left, bg="#11111b",
@@ -516,13 +538,37 @@ class NorthStarApp(tk.Tk):
         else:
             self._live_frame.lift()
 
-    # ── Report: open file ──
+    # ── Docs folder listing ──
+    def _refresh_docs_list(self):
+        docs_dir = os.path.join(BASE_DIR, "docs")
+        self._docs_listbox.delete(0, "end")
+        self._docs_files = []
+        if not os.path.isdir(docs_dir):
+            return
+        valid_ext = (".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff", ".pdf")
+        for name in sorted(os.listdir(docs_dir)):
+            if name.lower().endswith(valid_ext):
+                self._docs_files.append(os.path.join(docs_dir, name))
+                self._docs_listbox.insert("end", f"  {name}")
+
+    def _on_docs_select(self, event):
+        sel = self._docs_listbox.curselection()
+        if not sel:
+            return
+        path = self._docs_files[sel[0]]
+        self._load_file(path)
+
+    # ── Report: open file (browse dialog) ──
     def _open_file(self):
         path = filedialog.askopenfilename(
-            filetypes=[("Images & PDFs", "*.png *.jpg *.jpeg *.bmp *.tiff *.pdf"),
+            filetypes=[("Images & PDFs", "*.png *.jpg *.jpeg *.bmp *.tiff *.tif *.pdf"),
                        ("All files", "*.*")])
         if not path:
             return
+        self._load_file(path)
+
+    # ── Report: shared file loader ──
+    def _load_file(self, path):
         self._status_var.set(f"Loading {os.path.basename(path)}...")
         self.update_idletasks()
 
