@@ -8,3 +8,5 @@ sounddevice
 Pillow
 numpy
 PyMuPDF
+pytesseract
+huggingface_hub
