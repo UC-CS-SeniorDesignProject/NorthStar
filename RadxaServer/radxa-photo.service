@@ -1,0 +1,16 @@
+[Unit]
+Description=Radxa Photo Capture Server
+After=network-online.target NetworkManager.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/radxa-photo
+Restart=on-failure
+RestartSec=3
+PrivateTmp=true
+ReadWritePaths=/var/lib/radxa-photo
+DeviceAllow=/dev/video0 rw
+
+[Install]
+WantedBy=multi-user.target
