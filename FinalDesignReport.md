@@ -78,8 +78,6 @@ A: No, when both devices connect, the capture loop starts automatically. The app
 **Q: What happens if the server loses connection?**
 A: The app tracks latency and connection status. If the primary processing server is unavailable, the app can fall back to Apple Vision on-device processing. If 5 consecutive errors occur, the system safely auto-pauses until the connection is restored.
 
-*(Include screenshots of the app dashboard and settings here)*
-
 ---
 
 ## 5. Presentations
