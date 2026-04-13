@@ -1,0 +1,604 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		04B00A392F833026004B966B /* SpeechService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B00A382F833026004B966B /* SpeechService.swift */; };
+		A10000001 /* NorthStarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000001 /* NorthStarApp.swift */; };
+		A10000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000002 /* ContentView.swift */; };
+		A10000003 /* OCRModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000003 /* OCRModels.swift */; };
+		A10000004 /* DetectModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000004 /* DetectModels.swift */; };
+		A10000005 /* ServerModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000005 /* ServerModels.swift */; };
+		A10000006 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000006 /* APIClient.swift */; };
+		A10000007 /* OCRService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000007 /* OCRService.swift */; };
+		A10000008 /* DetectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000008 /* DetectService.swift */; };
+		A10000009 /* ServerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000009 /* ServerService.swift */; };
+		A1000000A /* OCRViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000000A /* OCRViewModel.swift */; };
+		A1000000B /* DetectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000000B /* DetectViewModel.swift */; };
+		A1000000C /* ServerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000000C /* ServerViewModel.swift */; };
+		A1000000D /* OCRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000000D /* OCRView.swift */; };
+		A1000000E /* DetectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000000E /* DetectView.swift */; };
+		A1000000F /* ServerStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000000F /* ServerStatusView.swift */; };
+		A10000010 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010 /* SettingsView.swift */; };
+		A10000011 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000011 /* ImagePicker.swift */; };
+		A10000012 /* BoundingBoxOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000012 /* BoundingBoxOverlay.swift */; };
+		A10000013 /* ImageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000013 /* ImageUtils.swift */; };
+		A10000014 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A20000014 /* Assets.xcassets */; };
+		A10000015 /* VisionOCRService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000016 /* VisionOCRService.swift */; };
+		A10000016 /* VisionDetectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000017 /* VisionDetectService.swift */; };
+		A10000017 /* ProcessingMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000018 /* ProcessingMode.swift */; };
+		A10000018 /* CaptureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000019 /* CaptureService.swift */; };
+		A10000019 /* CaptureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000001A /* CaptureViewModel.swift */; };
+		A1000001A /* RemoteCaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000001B /* RemoteCaptureView.swift */; };
+		B10000001 /* RadxaModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000001 /* RadxaModels.swift */; };
+		B10000002 /* RadxaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000002 /* RadxaService.swift */; };
+		B10000003 /* RadxaSetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000003 /* RadxaSetupViewModel.swift */; };
+		B10000004 /* RadxaSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000004 /* RadxaSetupView.swift */; };
+		C10000001 /* LatencyMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000001 /* LatencyMonitor.swift */; };
+		C10000002 /* AutoCaptureLoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000002 /* AutoCaptureLoop.swift */; };
+		C10000003 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000003 /* DashboardView.swift */; };
+		C10000004 /* PerformanceDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000004 /* PerformanceDashboardView.swift */; };
+		C10000005 /* CaptureIntervalSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000005 /* CaptureIntervalSettingView.swift */; };
+		C10000006 /* TTSInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000006 /* TTSInfoView.swift */; };
+		C10000007 /* NetworkDiscovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000007 /* NetworkDiscovery.swift */; };
+		C10000008 /* ActivityLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000008 /* ActivityLog.swift */; };
+		C10000009 /* ActivityLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000009 /* ActivityLogView.swift */; };
+		C1000000A /* RadxaWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C200000A /* RadxaWebSocketService.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		04B00A382F833026004B966B /* SpeechService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechService.swift; sourceTree = "<group>"; };
+		04B00A8B2F84194A004B966B /* __init__.cpython-312.pyc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "__init__.cpython-312.pyc"; sourceTree = "<group>"; };
+		04B00A8C2F84194A004B966B /* detector.cpython-312.pyc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "detector.cpython-312.pyc"; sourceTree = "<group>"; };
+		04B00A8D2F84194A004B966B /* models.cpython-312.pyc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "models.cpython-312.pyc"; sourceTree = "<group>"; };
+		04B00A8E2F84194A004B966B /* routes.cpython-312.pyc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "routes.cpython-312.pyc"; sourceTree = "<group>"; };
+		04B00A902F84194A004B966B /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		04B00A912F84194A004B966B /* detector.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = detector.py; sourceTree = "<group>"; };
+		04B00A922F84194A004B966B /* models.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = models.py; sourceTree = "<group>"; };
+		04B00A932F84194A004B966B /* prompt.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = prompt.txt; sourceTree = "<group>"; };
+		04B00A942F84194A004B966B /* routes.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = routes.py; sourceTree = "<group>"; };
+		04B00A952F84194A004B966B /* TESTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TESTING.md; sourceTree = "<group>"; };
+		04B00A972F84194A004B966B /* __init__.cpython-312.pyc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "__init__.cpython-312.pyc"; sourceTree = "<group>"; };
+		04B00A982F84194A004B966B /* engine.cpython-312.pyc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "engine.cpython-312.pyc"; sourceTree = "<group>"; };
+		04B00A992F84194A004B966B /* layout.cpython-312.pyc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "layout.cpython-312.pyc"; sourceTree = "<group>"; };
+		04B00A9A2F84194A004B966B /* models.cpython-312.pyc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "models.cpython-312.pyc"; sourceTree = "<group>"; };
+		04B00A9B2F84194A004B966B /* routes.cpython-312.pyc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "routes.cpython-312.pyc"; sourceTree = "<group>"; };
+		04B00A9D2F84194A004B966B /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		04B00A9E2F84194A004B966B /* debug_visual.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = debug_visual.py; sourceTree = "<group>"; };
+		04B00A9F2F84194A004B966B /* engine.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = engine.py; sourceTree = "<group>"; };
+		04B00AA02F84194A004B966B /* layout.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = layout.py; sourceTree = "<group>"; };
+		04B00AA12F84194A004B966B /* models.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = models.py; sourceTree = "<group>"; };
+		04B00AA22F84194A004B966B /* routes.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = routes.py; sourceTree = "<group>"; };
+		04B00AA32F84194A004B966B /* TESTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TESTING.md; sourceTree = "<group>"; };
+		04B00AA52F84194A004B966B /* __init__.cpython-312.pyc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "__init__.cpython-312.pyc"; sourceTree = "<group>"; };
+		04B00AA62F84194A004B966B /* app.cpython-312.pyc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "app.cpython-312.pyc"; sourceTree = "<group>"; };
+		04B00AA72F84194A004B966B /* auth.cpython-312.pyc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "auth.cpython-312.pyc"; sourceTree = "<group>"; };
+		04B00AA82F84194A004B966B /* cache.cpython-312.pyc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "cache.cpython-312.pyc"; sourceTree = "<group>"; };
+		04B00AA92F84194A004B966B /* image.cpython-312.pyc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "image.cpython-312.pyc"; sourceTree = "<group>"; };
+		04B00AAA2F84194A004B966B /* metrics.cpython-312.pyc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "metrics.cpython-312.pyc"; sourceTree = "<group>"; };
+		04B00AAC2F84194A004B966B /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		04B00AAD2F84194A004B966B /* app.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = app.py; sourceTree = "<group>"; };
+		04B00AAE2F84194A004B966B /* auth.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = auth.py; sourceTree = "<group>"; };
+		04B00AAF2F84194A004B966B /* cache.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = cache.py; sourceTree = "<group>"; };
+		04B00AB02F84194A004B966B /* image.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = image.py; sourceTree = "<group>"; };
+		04B00AB12F84194A004B966B /* metrics.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = metrics.py; sourceTree = "<group>"; };
+		04B00AB22F84194A004B966B /* TESTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TESTING.md; sourceTree = "<group>"; };
+		04B00AB42F84194A004B966B /* .env */ = {isa = PBXFileReference; lastKnownFileType = text; path = .env; sourceTree = "<group>"; };
+		04B00AB52F84194A004B966B /* Main.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = Main.py; sourceTree = "<group>"; };
+		04B00AB62F84194A004B966B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		04B00AB72F84194A004B966B /* requirements.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = requirements.txt; sourceTree = "<group>"; };
+		A20000001 /* NorthStarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NorthStarApp.swift; sourceTree = "<group>"; };
+		A20000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A20000003 /* OCRModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRModels.swift; sourceTree = "<group>"; };
+		A20000004 /* DetectModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectModels.swift; sourceTree = "<group>"; };
+		A20000005 /* ServerModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerModels.swift; sourceTree = "<group>"; };
+		A20000006 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		A20000007 /* OCRService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRService.swift; sourceTree = "<group>"; };
+		A20000008 /* DetectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectService.swift; sourceTree = "<group>"; };
+		A20000009 /* ServerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerService.swift; sourceTree = "<group>"; };
+		A2000000A /* OCRViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRViewModel.swift; sourceTree = "<group>"; };
+		A2000000B /* DetectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectViewModel.swift; sourceTree = "<group>"; };
+		A2000000C /* ServerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerViewModel.swift; sourceTree = "<group>"; };
+		A2000000D /* OCRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRView.swift; sourceTree = "<group>"; };
+		A2000000E /* DetectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectView.swift; sourceTree = "<group>"; };
+		A2000000F /* ServerStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerStatusView.swift; sourceTree = "<group>"; };
+		A20000010 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A20000011 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		A20000012 /* BoundingBoxOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBoxOverlay.swift; sourceTree = "<group>"; };
+		A20000013 /* ImageUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUtils.swift; sourceTree = "<group>"; };
+		A20000014 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A20000015 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A20000016 /* VisionOCRService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionOCRService.swift; sourceTree = "<group>"; };
+		A20000017 /* VisionDetectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionDetectService.swift; sourceTree = "<group>"; };
+		A20000018 /* ProcessingMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingMode.swift; sourceTree = "<group>"; };
+		A20000019 /* CaptureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureService.swift; sourceTree = "<group>"; };
+		A2000001A /* CaptureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureViewModel.swift; sourceTree = "<group>"; };
+		A2000001B /* RemoteCaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteCaptureView.swift; sourceTree = "<group>"; };
+		A20000020 /* NorthStar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NorthStar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B20000001 /* RadxaModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadxaModels.swift; sourceTree = "<group>"; };
+		B20000002 /* RadxaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadxaService.swift; sourceTree = "<group>"; };
+		B20000003 /* RadxaSetupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadxaSetupViewModel.swift; sourceTree = "<group>"; };
+		B20000004 /* RadxaSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadxaSetupView.swift; sourceTree = "<group>"; };
+		C20000001 /* LatencyMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatencyMonitor.swift; sourceTree = "<group>"; };
+		C20000002 /* AutoCaptureLoop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCaptureLoop.swift; sourceTree = "<group>"; };
+		C20000003 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		C20000004 /* PerformanceDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceDashboardView.swift; sourceTree = "<group>"; };
+		C20000005 /* CaptureIntervalSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureIntervalSettingView.swift; sourceTree = "<group>"; };
+		C20000006 /* TTSInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTSInfoView.swift; sourceTree = "<group>"; };
+		C20000007 /* NetworkDiscovery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDiscovery.swift; sourceTree = "<group>"; };
+		C20000008 /* ActivityLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLog.swift; sourceTree = "<group>"; };
+		C20000009 /* ActivityLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLogView.swift; sourceTree = "<group>"; };
+		C200000A /* RadxaWebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadxaWebSocketService.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A30000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		04B00A8F2F84194A004B966B /* __pycache__ */ = {
+			isa = PBXGroup;
+			children = (
+				04B00A8B2F84194A004B966B /* __init__.cpython-312.pyc */,
+				04B00A8C2F84194A004B966B /* detector.cpython-312.pyc */,
+				04B00A8D2F84194A004B966B /* models.cpython-312.pyc */,
+				04B00A8E2F84194A004B966B /* routes.cpython-312.pyc */,
+			);
+			path = __pycache__;
+			sourceTree = "<group>";
+		};
+		04B00A962F84194A004B966B /* object_detection */ = {
+			isa = PBXGroup;
+			children = (
+				04B00A8F2F84194A004B966B /* __pycache__ */,
+				04B00A902F84194A004B966B /* __init__.py */,
+				04B00A912F84194A004B966B /* detector.py */,
+				04B00A922F84194A004B966B /* models.py */,
+				04B00A932F84194A004B966B /* prompt.txt */,
+				04B00A942F84194A004B966B /* routes.py */,
+				04B00A952F84194A004B966B /* TESTING.md */,
+			);
+			path = object_detection;
+			sourceTree = "<group>";
+		};
+		04B00A9C2F84194A004B966B /* __pycache__ */ = {
+			isa = PBXGroup;
+			children = (
+				04B00A972F84194A004B966B /* __init__.cpython-312.pyc */,
+				04B00A982F84194A004B966B /* engine.cpython-312.pyc */,
+				04B00A992F84194A004B966B /* layout.cpython-312.pyc */,
+				04B00A9A2F84194A004B966B /* models.cpython-312.pyc */,
+				04B00A9B2F84194A004B966B /* routes.cpython-312.pyc */,
+			);
+			path = __pycache__;
+			sourceTree = "<group>";
+		};
+		04B00AA42F84194A004B966B /* ocr */ = {
+			isa = PBXGroup;
+			children = (
+				04B00A9C2F84194A004B966B /* __pycache__ */,
+				04B00A9D2F84194A004B966B /* __init__.py */,
+				04B00A9E2F84194A004B966B /* debug_visual.py */,
+				04B00A9F2F84194A004B966B /* engine.py */,
+				04B00AA02F84194A004B966B /* layout.py */,
+				04B00AA12F84194A004B966B /* models.py */,
+				04B00AA22F84194A004B966B /* routes.py */,
+				04B00AA32F84194A004B966B /* TESTING.md */,
+			);
+			path = ocr;
+			sourceTree = "<group>";
+		};
+		04B00AAB2F84194A004B966B /* __pycache__ */ = {
+			isa = PBXGroup;
+			children = (
+				04B00AA52F84194A004B966B /* __init__.cpython-312.pyc */,
+				04B00AA62F84194A004B966B /* app.cpython-312.pyc */,
+				04B00AA72F84194A004B966B /* auth.cpython-312.pyc */,
+				04B00AA82F84194A004B966B /* cache.cpython-312.pyc */,
+				04B00AA92F84194A004B966B /* image.cpython-312.pyc */,
+				04B00AAA2F84194A004B966B /* metrics.cpython-312.pyc */,
+			);
+			path = __pycache__;
+			sourceTree = "<group>";
+		};
+		04B00AB32F84194A004B966B /* server */ = {
+			isa = PBXGroup;
+			children = (
+				04B00AAB2F84194A004B966B /* __pycache__ */,
+				04B00AAC2F84194A004B966B /* __init__.py */,
+				04B00AAD2F84194A004B966B /* app.py */,
+				04B00AAE2F84194A004B966B /* auth.py */,
+				04B00AAF2F84194A004B966B /* cache.py */,
+				04B00AB02F84194A004B966B /* image.py */,
+				04B00AB12F84194A004B966B /* metrics.py */,
+				04B00AB22F84194A004B966B /* TESTING.md */,
+			);
+			path = server;
+			sourceTree = "<group>";
+		};
+		04B00AB82F84194A004B966B /* OCR_OD_Server_Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				04B00A962F84194A004B966B /* object_detection */,
+				04B00AA42F84194A004B966B /* ocr */,
+				04B00AB32F84194A004B966B /* server */,
+				04B00AB42F84194A004B966B /* .env */,
+				04B00AB52F84194A004B966B /* Main.py */,
+				04B00AB62F84194A004B966B /* README.md */,
+				04B00AB72F84194A004B966B /* requirements.txt */,
+			);
+			path = OCR_OD_Server_Implementation;
+			sourceTree = "<group>";
+		};
+		A40000001 = {
+			isa = PBXGroup;
+			children = (
+				A40000002 /* NorthStar */,
+				A40000010 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A40000002 /* NorthStar */ = {
+			isa = PBXGroup;
+			children = (
+				A20000001 /* NorthStarApp.swift */,
+				A20000002 /* ContentView.swift */,
+				A40000003 /* Models */,
+				A40000004 /* Services */,
+				A40000005 /* ViewModels */,
+				A40000006 /* Views */,
+				A40000007 /* Utilities */,
+				A20000014 /* Assets.xcassets */,
+				A20000015 /* Info.plist */,
+				04B00AB82F84194A004B966B /* OCR_OD_Server_Implementation */,
+			);
+			path = NorthStar;
+			sourceTree = "<group>";
+		};
+		A40000003 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A20000003 /* OCRModels.swift */,
+				A20000004 /* DetectModels.swift */,
+				A20000005 /* ServerModels.swift */,
+				A20000018 /* ProcessingMode.swift */,
+				B20000001 /* RadxaModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A40000004 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				04B00A382F833026004B966B /* SpeechService.swift */,
+				A20000007 /* OCRService.swift */,
+				A20000008 /* DetectService.swift */,
+				A20000009 /* ServerService.swift */,
+				A20000016 /* VisionOCRService.swift */,
+				A20000017 /* VisionDetectService.swift */,
+				A20000019 /* CaptureService.swift */,
+				A20000006 /* APIClient.swift */,
+				B20000002 /* RadxaService.swift */,
+				C20000001 /* LatencyMonitor.swift */,
+				C20000002 /* AutoCaptureLoop.swift */,
+				C20000007 /* NetworkDiscovery.swift */,
+				C20000008 /* ActivityLog.swift */,
+				C200000A /* RadxaWebSocketService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A40000005 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A2000000A /* OCRViewModel.swift */,
+				A2000000B /* DetectViewModel.swift */,
+				A2000000C /* ServerViewModel.swift */,
+				A2000001A /* CaptureViewModel.swift */,
+				B20000003 /* RadxaSetupViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		A40000006 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A2000000D /* OCRView.swift */,
+				A2000000E /* DetectView.swift */,
+				A2000000F /* ServerStatusView.swift */,
+				A20000010 /* SettingsView.swift */,
+				A20000011 /* ImagePicker.swift */,
+				A20000012 /* BoundingBoxOverlay.swift */,
+				A2000001B /* RemoteCaptureView.swift */,
+				B20000004 /* RadxaSetupView.swift */,
+				C20000003 /* DashboardView.swift */,
+				C20000004 /* PerformanceDashboardView.swift */,
+				C20000005 /* CaptureIntervalSettingView.swift */,
+				C20000006 /* TTSInfoView.swift */,
+				C20000009 /* ActivityLogView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A40000007 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A20000013 /* ImageUtils.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		A40000010 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A20000020 /* NorthStar.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A50000001 /* NorthStar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A70000003 /* Build configuration list for PBXNativeTarget "NorthStar" */;
+			buildPhases = (
+				A60000001 /* Sources */,
+				A30000001 /* Frameworks */,
+				A60000002 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NorthStar;
+			productName = NorthStar;
+			productReference = A20000020 /* NorthStar.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A80000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					A50000001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = A70000001 /* Build configuration list for PBXProject "NorthStar" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A40000001;
+			productRefGroup = A40000010 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A50000001 /* NorthStar */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A60000002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000014 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A60000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000001 /* NorthStarApp.swift in Sources */,
+				A10000002 /* ContentView.swift in Sources */,
+				A10000003 /* OCRModels.swift in Sources */,
+				A10000004 /* DetectModels.swift in Sources */,
+				A10000005 /* ServerModels.swift in Sources */,
+				A10000006 /* APIClient.swift in Sources */,
+				A10000007 /* OCRService.swift in Sources */,
+				A10000008 /* DetectService.swift in Sources */,
+				A10000009 /* ServerService.swift in Sources */,
+				A1000000A /* OCRViewModel.swift in Sources */,
+				A1000000B /* DetectViewModel.swift in Sources */,
+				A1000000C /* ServerViewModel.swift in Sources */,
+				A1000000D /* OCRView.swift in Sources */,
+				04B00A392F833026004B966B /* SpeechService.swift in Sources */,
+				A1000000E /* DetectView.swift in Sources */,
+				A1000000F /* ServerStatusView.swift in Sources */,
+				A10000010 /* SettingsView.swift in Sources */,
+				A10000011 /* ImagePicker.swift in Sources */,
+				A10000012 /* BoundingBoxOverlay.swift in Sources */,
+				A10000013 /* ImageUtils.swift in Sources */,
+				A10000015 /* VisionOCRService.swift in Sources */,
+				A10000016 /* VisionDetectService.swift in Sources */,
+				A10000017 /* ProcessingMode.swift in Sources */,
+				A10000018 /* CaptureService.swift in Sources */,
+				A10000019 /* CaptureViewModel.swift in Sources */,
+				A1000001A /* RemoteCaptureView.swift in Sources */,
+				B10000001 /* RadxaModels.swift in Sources */,
+				B10000002 /* RadxaService.swift in Sources */,
+				B10000003 /* RadxaSetupViewModel.swift in Sources */,
+				B10000004 /* RadxaSetupView.swift in Sources */,
+				C10000001 /* LatencyMonitor.swift in Sources */,
+				C10000002 /* AutoCaptureLoop.swift in Sources */,
+				C10000003 /* DashboardView.swift in Sources */,
+				C10000004 /* PerformanceDashboardView.swift in Sources */,
+				C10000005 /* CaptureIntervalSettingView.swift in Sources */,
+				C10000006 /* TTSInfoView.swift in Sources */,
+				C10000007 /* NetworkDiscovery.swift in Sources */,
+				C10000008 /* ActivityLog.swift in Sources */,
+				C10000009 /* ActivityLogView.swift in Sources */,
+				C1000000A /* RadxaWebSocketService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A90000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A90000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A90000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U3V45N3N8V;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NorthStar/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NorthStar;
+				INFOPLIST_KEY_NSCameraUsageDescription = "NorthStar needs camera access to capture images for OCR and object detection.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "NorthStar needs photo library access to select images for OCR and object detection.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.northstarswift.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A90000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U3V45N3N8V;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NorthStar/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NorthStar;
+				INFOPLIST_KEY_NSCameraUsageDescription = "NorthStar needs camera access to capture images for OCR and object detection.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "NorthStar needs photo library access to select images for OCR and object detection.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.northstarswift.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A70000001 /* Build configuration list for PBXProject "NorthStar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A90000001 /* Debug */,
+				A90000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A70000003 /* Build configuration list for PBXNativeTarget "NorthStar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A90000003 /* Debug */,
+				A90000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A80000001 /* Project object */;
+}
