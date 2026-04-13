@@ -17,11 +17,10 @@
 - [Budget](#budget)
 - [Appendix](#appendix)
 - [Repository](#repository)
-- [Controller and Flutter Run Flow](#controller-and-flutter-run-flow)
 
-## Controller and Flutter Run Flow
+## Controller  Run Flow
 
-This section explains how to set up and run the vision system with both Python server and Flutter components.
+This section explains how to set up and run the vision system with the Python server.
 
 ### 1) Setup Python Environment
 
@@ -52,105 +51,10 @@ Run the vision server using the virtual environment:
 - Does not start camera processing until `/controller/start` is called
 
 **Server Status:**
-- ✅ Success: `INFO: Uvicorn running on http://0.0.0.0:8001`
-- ❌ Port conflict: `[Errno 10048] error while attempting to bind on address`
+- Success: `INFO: Uvicorn running on http://0.0.0.0:8001`
+- Port conflict: `[Errno 10048] error while attempting to bind on address`
   - Solution: Kill existing process with `taskkill /F /PID <process_id>`
   - Find PID with: `netstat -ano | findstr :8001`
-
-### 3) Run Flutter Application
-
-In a **separate terminal**, start the Flutter app:
-
-```powershell
-# Navigate to Flutter directory
-cd northstar-flutter
-
-# Run on web browser (recommended for development)  
-flutter run -d chrome
-
-# Alternative: Run with CORS disabled if needed
-flutter run -d chrome --web-browser-flag="--disable-web-security"
-```
-
-**Important Configuration:**
-- **Vision Controller URL**: Set to `http://127.0.0.1:8001` (note port 8001)
-- **Processing Mode**: Toggle between "Server" and "Local" modes
-- **Auto-polling**: App automatically checks server status every second
-
-### 4) Using the Vision System
-
-**Toggle Button Controls:**
-- **Start/Stop Vision**: Single button that toggles between starting and stopping vision processing
-- **Server/Local Mode**: Toggle between server-based and local device processing
-
-**Vision Processing Modes:**
-
-1. **Server Mode** (Python Backend):
-   - Uses full-size AI models (YOLO, EasyOCR, BLIP)
-   - Higher accuracy (~95%)
-   - Network dependent
-   - Requires Python server running
-
-2. **Local Mode** (Device Processing):  
-   - Uses Google ML Kit (on-device processing)
-   - Good accuracy (~85-90%)
-   - Works offline
-   - Faster response time
-   - No server dependency
-
-**Automatic Fallback:**
-When "Server" mode is selected but connection fails, the app automatically falls back to local processing with a clear warning message: *"⚠️ Can't connect to server, switching to local processing"*
-
-### 5) Vision Status Indicators
-
-The app displays real-time status information:
-
-- **Vision State**: Active/Idle with processing mode indicator
-- **Camera Frames**: Receiving/None yet  
-- **Processing Mode**: Shows "Server", "Local", or "Local (Fallback)"
-- **Warning Icons**: Displayed when fallback occurs
-- **OCR Text**: Latest recognized text from camera
-- **Scene Description**: AI-generated scene caption
-- **Locked Target**: Currently focused object
-
-**Status Values from `/controller/status`:**
-- `running`: Whether vision processing is active
-- `thread_alive`: Backend processing thread status  
-- `last_frame_time`: Camera frame timestamp (0.0 = no frames)
-- `last_error`: Backend error messages
-- `scene_description`: Current scene caption
-- `latest_text`: OCR text from focused object
-- `locked_label`: Current object focus
-
-### 6) Troubleshooting
-
-**Common Issues:**
-
-🔧 **"Can't connect to server"**
-- Verify Python server is running on port 8001
-- Check `http://localhost:8001/health` in browser
-- Ensure virtual environment is activated
-
-🔧 **"Camera not working"**  
-- Check `last_frame_time` in status (should be > 0)
-- Verify camera permissions in browser
-- Look for `last_error` messages
-
-🔧 **"Vision stuck on 'Analyzing scene...'"**
-- Check `last_frame_time` and `last_error` in status
-- Common cause: Camera opened but frame reads failing
-
-🔧 **Port already in use**
-```powershell
-# Find and kill process using port 8001
-netstat -ano | findstr :8001
-taskkill /F /PID <process_id>
-```
-
-**Performance Notes:**
-- **Web (Chrome)**: Use `http://127.0.0.1:8001` as controller base URL
-- **Mobile**: Use `http://10.0.2.2:8001` for Android emulator  
-- **CORS**: Enabled for localhost/127.0.0.1 origins in Python server
 
 # Team Members
 
