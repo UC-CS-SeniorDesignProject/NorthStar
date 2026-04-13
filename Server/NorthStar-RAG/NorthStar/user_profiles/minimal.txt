@@ -1,0 +1,4 @@
+User prefers extremely short instructions.
+Keep responses under 5 words when possible.
+Avoid unnecessary explanation.
+Focus only on immediate hazards.

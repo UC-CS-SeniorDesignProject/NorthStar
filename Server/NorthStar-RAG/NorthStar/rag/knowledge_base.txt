@@ -1,0 +1,36 @@
+stairs — Stairs ahead; move carefully and use support if available.
+curb — Curb nearby; adjust your step carefully.
+ramp — Ramp ahead; step carefully.
+wet floor — Surface may be slippery; step carefully.
+spill — Spill detected; avoid stepping on it.
+ice — Slippery surface detected; move slowly.
+snow — Surface may be unstable; step carefully.
+glass door — Transparent barrier detected; move carefully.
+door — Door nearby; reach forward before moving.
+wall — Wall nearby; avoid direct contact.
+window — Glass surface nearby; avoid contact.
+knife — Sharp object detected; handle carefully.
+scissors — Sharp object detected; handle carefully.
+fire — Potential danger detected; proceed with extra caution.
+smoke — Smoke detected; move cautiously.
+ladder — Ladder detected; avoid stepping on it.
+pole — Vertical obstacle nearby; adjust movement.
+sign — Object nearby; adjust movement.
+handrail — Support available; use it for stability.
+railing — Support structure nearby; use it if needed.
+low light — Low lighting detected; move slowly.
+bright light — Bright light detected; adjust vision carefully.
+darkness — Visibility reduced; proceed cautiously.
+platform edge — Platform edge nearby; proceed carefully.
+elevator — Elevator nearby; wait for safe entry.
+escalator — Moving stairs detected; step carefully.
+barrier — Barrier detected; stop before contact.
+gate — Entry barrier nearby; proceed carefully.
+fence — Barrier detected; avoid contact.
+mirror — Reflective surface nearby; avoid contact.
+traffic light — Traffic signal nearby; wait for safe crossing.
+crosswalk — Crossing area detected; remain alert.
+bus stop — Waiting area detected; proceed carefully.
+train station — Transit area detected; stay aware.
+subway platform — Platform nearby; move cautiously.
+unknown — No immediate hazard detected; safe to move.

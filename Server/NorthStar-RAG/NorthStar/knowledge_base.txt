@@ -1,0 +1,187 @@
+stairs — Stairs ahead; move carefully and use support if available.
+curb — Curb nearby; adjust your step carefully.
+ramp — Ramp ahead; step carefully.
+wet floor — Surface may be slippery; step carefully.
+spill — Spill detected; avoid stepping on it.
+ice — Slippery surface detected; move slowly.
+snow — Surface may be unstable; step carefully.
+glass door — Transparent barrier detected; move carefully.
+door — Door nearby; reach forward before moving.
+wall — Wall nearby; avoid direct contact.
+window — Glass surface nearby; avoid contact.
+knife — Sharp object detected; handle carefully.
+scissors — Sharp object detected; handle carefully.
+fire — Potential danger detected; proceed with extra caution.
+smoke — Smoke detected; move cautiously.
+ladder — Ladder detected; avoid stepping on it.
+pole — Vertical obstacle nearby; adjust movement.
+sign — Object nearby; adjust movement.
+handrail — Support available; use it for stability.
+railing — Support structure nearby; use it if needed.
+low light — Low lighting detected; move slowly.
+bright light — Bright light detected; adjust vision carefully.
+darkness — Visibility reduced; proceed cautiously.
+platform edge — Platform edge nearby; proceed carefully.
+elevator — Elevator nearby; wait for safe entry.
+escalator — Moving stairs detected; step carefully.
+barrier — Barrier detected; stop before contact.
+gate — Entry barrier nearby; proceed carefully.
+fence — Barrier detected; avoid contact.
+mirror — Reflective surface nearby; avoid contact.
+traffic light — Traffic signal nearby; wait for safe crossing.
+crosswalk — Crossing area detected; remain alert.
+bus stop — Waiting area detected; proceed carefully.
+train station — Transit area detected; stay aware.
+subway platform — Platform nearby; move cautiously.
+unknown — No immediate hazard detected; safe to move.
+person — Person nearby; be aware of their movement.
+car — URGENT: Vehicle detected; stop and listen before proceeding.
+truck — URGENT: Large vehicle nearby; stay clear and wait.
+bus — URGENT: Bus detected; stay on the sidewalk and wait.
+motorcycle — URGENT: Motorcycle nearby; stop and listen for direction.
+bicycle — Bicycle nearby; stay to one side.
+dog — Animal nearby; move slowly and avoid startling it.
+cat — Small animal nearby; no action needed.
+bird — Bird nearby; no action needed.
+horse — Large animal nearby; keep your distance.
+cow — Large animal nearby; keep your distance.
+sheep — Animal nearby; keep your distance.
+bear — URGENT: Dangerous animal detected; back away slowly.
+bench — Seating area nearby; safe to approach if needed.
+chair — Chair nearby; step around it.
+couch — Furniture nearby; step around it.
+bed — Furniture nearby; be aware of your surroundings.
+dining table — Table nearby; reach forward before moving.
+toilet — Restroom fixture nearby; orient yourself carefully.
+sink — Sink nearby; surface may be wet.
+bottle — Object on surface nearby; avoid knocking it over.
+cup — Object on surface nearby; avoid knocking it over.
+bowl — Object on surface nearby; avoid knocking it over.
+tv — Screen nearby; no obstruction.
+laptop — Object on surface nearby; avoid contact.
+cell phone — Small object nearby; avoid stepping on it.
+book — Object nearby; avoid stepping on it.
+clock — No obstruction; use for orientation.
+vase — Fragile object nearby; avoid contact.
+potted plant — Object nearby; step around it.
+backpack — Object on ground; avoid tripping.
+suitcase — Luggage nearby; step around it.
+umbrella — Object nearby; avoid tripping.
+handbag — Object nearby; avoid tripping.
+tie — No obstruction.
+frisbee — Object nearby; be aware of movement.
+skis — Equipment on ground; avoid tripping.
+snowboard — Equipment on ground; avoid tripping.
+sports ball — Object on ground; avoid stepping on it.
+kite — Airborne object; no obstruction.
+baseball bat — Object nearby; avoid contact.
+tennis racket — Object nearby; avoid contact.
+surfboard — Large object nearby; step around it.
+skateboard — URGENT: Rolling hazard on ground; avoid stepping on it.
+refrigerator — Large appliance nearby; step around it.
+oven — Appliance nearby; surface may be hot.
+toaster — Appliance nearby; surface may be hot.
+microwave — Appliance nearby; no obstruction.
+fork — Sharp utensil nearby; handle carefully.
+spoon — Utensil nearby; no hazard.
+apple — Object on surface; no hazard.
+banana — Object on ground; avoid slipping.
+sandwich — No hazard.
+orange — Object on surface; no hazard.
+broccoli — No hazard.
+carrot — No hazard.
+hot dog — No hazard.
+pizza — No hazard.
+donut — No hazard.
+cake — No hazard.
+remote — Small object; avoid stepping on it.
+keyboard — Object on surface; no obstruction.
+mouse — Small object; avoid stepping on it.
+teddy bear — Object nearby; no hazard.
+hair drier — Object nearby; cord may be a trip hazard.
+toothbrush — No hazard.
+stop sign — Intersection ahead; stop and assess before crossing.
+parking meter — Pole obstacle nearby; step around it.
+fire hydrant — Low obstacle nearby; step around it.
+airplane — Aircraft nearby; stay aware of your surroundings.
+boat — Watercraft nearby; be cautious near water's edge.
+train — URGENT: Train nearby; stay well clear of tracks.
+pothole — URGENT: Ground hazard ahead; step carefully or go around.
+cone — Obstacle marking nearby; area may be hazardous.
+bollard — Post obstacle nearby; step around it.
+construction — Hazardous area ahead; find alternate path.
+car approaching crosswalk — URGENT: Vehicle near crossing; wait until it passes.
+person at crosswalk — Pedestrian crossing area; follow the flow if safe.
+bicycle on sidewalk — Bicycle approaching on sidewalk; move to one side.
+tree — Tree nearby; step around it.
+spherical_roadblock — Low round obstacle on ground; step around it.
+warning_column — Vertical warning marker ahead; step around it.
+waste_container — Bin nearby; step around it.
+street_light — Pole obstacle nearby; step around it.
+crutch — Mobility aid nearby; be careful not to trip on it.
+car on your left — URGENT: Vehicle on your left; stay to the right.
+car on your right — URGENT: Vehicle on your right; stay to the left.
+car ahead — URGENT: Vehicle directly ahead; stop and wait.
+person on your left — Person on your left; be aware.
+person on your right — Person on your right; be aware.
+person ahead — Person directly ahead; adjust your path.
+car on your left close — URGENT: Vehicle very close on your left; stop immediately.
+car on your right close — URGENT: Vehicle very close on your right; stop immediately.
+car ahead close — URGENT: Vehicle very close ahead; stop immediately.
+bicycle on your left — Bicycle on your left; stay to the right.
+bicycle on your right — Bicycle on your right; stay to the left.
+truck on your left — URGENT: Large vehicle on your left; stay clear.
+truck on your right — URGENT: Large vehicle on your right; stay clear.
+bus ahead — URGENT: Bus directly ahead; stay on the sidewalk.
+person approaching — Person walking toward you; hold your path and let them pass.
+person approaching quickly — URGENT: Person running toward you; step aside.
+person moving away — Person moving away from you; path is clearing.
+car approaching — URGENT: Vehicle approaching; stop and wait for it to pass.
+car approaching quickly — URGENT: Vehicle approaching fast; stop immediately and stay clear.
+car moving away — Vehicle moving away; safe to proceed cautiously.
+truck approaching — URGENT: Large vehicle approaching; stay well back.
+truck approaching quickly — URGENT: Large vehicle approaching fast; stop and stay far back.
+bus approaching — URGENT: Bus approaching; stay on the sidewalk.
+motorcycle approaching — URGENT: Motorcycle approaching; stop and listen.
+motorcycle approaching quickly — URGENT: Motorcycle approaching fast; stop immediately.
+bicycle approaching — Bicycle coming toward you; step to one side.
+bicycle approaching quickly — Bicycle approaching fast; step aside quickly.
+bicycle moving — Bicycle in motion nearby; stay aware.
+dog approaching — Dog approaching; stay calm and still.
+dog moving — Dog in motion nearby; be cautious.
+person very close — Person very close to you; slow down to avoid collision.
+car very close — URGENT: Vehicle very close; stop immediately and do not move.
+truck very close — URGENT: Large vehicle very close; stop immediately.
+bus very close — URGENT: Bus very close; do not move.
+person moving left quickly — Person running to your left; stay to the right.
+person moving right quickly — Person running to your right; stay to the left.
+car moving left quickly — URGENT: Vehicle moving left quickly; stay to the right.
+car moving right quickly — URGENT: Vehicle moving right quickly; stay to the left.
+person directly ahead very close — Person directly in front of you; stop and let them pass.
+chair very close directly ahead — Chair directly in your path; step around it.
+bench to your left — Seating area to your left; safe to sit if needed.
+bench to your right — Seating area to your right; safe to sit if needed.
+dining table directly ahead — Table directly ahead; reach out before moving forward.
+door directly ahead — Door directly ahead; reach forward to find the handle.
+stairs directly ahead — URGENT: Stairs directly ahead; feel for the edge with your foot.
+stairs very close — URGENT: Stairs very close; stop and use the handrail.
+curb directly ahead — Curb ahead; prepare to step up or down.
+curb very close — URGENT: Curb at your feet; step carefully.
+crosswalk directly ahead — Crosswalk ahead; listen for traffic before crossing.
+traffic light directly ahead — Traffic signal ahead; wait for audio signal or ask for help.
+stop sign directly ahead — Intersection ahead; stop completely and listen for traffic.
+fire hydrant to your left — Low obstacle to your left; step to the right.
+fire hydrant to your right — Low obstacle to your right; step to the left.
+pothole directly ahead — URGENT: Ground hazard directly ahead; step around it.
+pothole very close — URGENT: Ground hazard at your feet; stop and go around.
+person stationary directly ahead — Person standing still ahead; go around them.
+multiple people — Multiple people nearby; move slowly through the crowd.
+multiple cars — URGENT: Multiple vehicles nearby; stay on the sidewalk.
+crowded area — Crowded area detected; move slowly and stay to one side.
+open area — Open area ahead; safe to walk freely.
+narrow passage — Narrow passage detected; stay centered and move carefully.
+indoor hallway — Indoor hallway; stay to one side and listen for others.
+outdoor sidewalk — Sidewalk detected; stay on the path.
+road crossing — Road crossing ahead; stop and check for traffic before crossing.
+parking lot — Parking lot area; watch for moving vehicles from all directions.
+intersection — Intersection ahead; stop and assess all directions before proceeding.

@@ -1,0 +1,5 @@
+sentence-transformers
+faiss-cpu
+numpy
+google-generativeai
+python-dotenv
