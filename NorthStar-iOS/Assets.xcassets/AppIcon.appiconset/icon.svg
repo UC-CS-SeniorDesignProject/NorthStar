@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0A1628"/>
+      <stop offset="100%" stop-color="#1A2F4E"/>
+    </linearGradient>
+    <linearGradient id="star" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#A8C8F0"/>
+    </linearGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#60A5FA" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="224" fill="url(#bg)"/>
+
+  <!-- Outer glow ring -->
+  <circle cx="512" cy="512" r="340" fill="none" stroke="url(#ring)" stroke-width="3" opacity="0.4"/>
+
+  <!-- Compass circle -->
+  <circle cx="512" cy="512" r="280" fill="none" stroke="url(#ring)" stroke-width="6" opacity="0.6"/>
+
+  <!-- Compass tick marks -->
+  <g stroke="#3B82F6" stroke-width="4" opacity="0.5">
+    <line x1="512" y1="232" x2="512" y2="262"/>
+    <line x1="512" y1="762" x2="512" y2="792"/>
+    <line x1="232" y1="512" x2="262" y2="512"/>
+    <line x1="762" y1="512" x2="792" y2="512"/>
+  </g>
+
+  <!-- North Star - 4-pointed star -->
+  <g transform="translate(512,512)">
+    <!-- Main vertical beam (North-South, elongated) -->
+    <polygon points="0,-220 28,-40 0,220 -28,-40" fill="url(#star)" opacity="0.95"/>
+    <!-- Main horizontal beam (East-West, shorter) -->
+    <polygon points="-160,0 -40,-22 160,0 -40,22" fill="url(#star)" opacity="0.85"/>
+    <!-- Diagonal beams -->
+    <polygon points="-120,-120 -10,-10 120,120 10,10" fill="url(#star)" opacity="0.4" stroke-width="0"/>
+    <polygon points="120,-120 10,-10 -120,120 -10,10" fill="url(#star)" opacity="0.4"/>
+    <!-- Center glow -->
+    <circle cx="0" cy="0" r="18" fill="#FFFFFF"/>
+    <circle cx="0" cy="0" r="36" fill="#FFFFFF" opacity="0.15"/>
+  </g>
+
+  <!-- Subtle "N" indicator at top -->
+  <text x="512" y="210" text-anchor="middle" fill="#60A5FA" font-family="system-ui, -apple-system, Helvetica" font-size="48" font-weight="700" opacity="0.7">N</text>
+
+  <!-- Small eye icon below star to represent vision/glasses -->
+  <g transform="translate(512, 680)" opacity="0.5">
+    <path d="M-50,0 C-50,-25 -25,-45 0,-45 C25,-45 50,-25 50,0 C50,25 25,45 0,45 C-25,45 -50,25 -50,0 Z" fill="none" stroke="#60A5FA" stroke-width="4"/>
+    <circle cx="0" cy="0" r="14" fill="none" stroke="#60A5FA" stroke-width="4"/>
+  </g>
+</svg>
