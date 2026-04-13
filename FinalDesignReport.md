@@ -161,5 +161,5 @@ Led the integration of the Retrieval-Augmented Generation (RAG) pipeline, enabli
 
 ## 10. Appendix
 
-* **Code Repositories:** * NorthStar Server: `https://github.com/UC-CS-SeniorDesignProject/NorthStar`
-  * NorthStar iOS App: `https://github.com/JaredWalden00/northstarswift`
+**Code Repositories:**
+* NorthStar Server: `https://github.com/UC-CS-SeniorDesignProject/NorthStar`
